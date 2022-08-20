@@ -1,7 +1,11 @@
+#include <csignal>
 #include <getopt.h>
 #include <iostream>
+#include <unistd.h>// sleep
 
 const char *PROG_NAME = "application";
+
+static bool stop_app = false;
 
 struct prog_options
 {
@@ -9,6 +13,13 @@ struct prog_options
 	int daemon_flag = 0;
 	int debug_flag = 0;
 };
+
+void
+handle_sigint(
+	int signal)
+{
+	stop_app = true;
+}
 
 void
 display_usage()
@@ -71,12 +82,22 @@ parse_args(
 
 int main(int argc, char *argv[])
 {
+	signal(SIGINT, handle_sigint);// ctrl+c to stop application
+
 	prog_options opts;
 	parse_args(argc,argv,opts);
 
 	printf("cfg_filepath = %s\n", opts.cfg_filepath.c_str());
 	printf("daemon_flag  = %d\n", opts.daemon_flag);
 	printf("debug_flag   = %d\n", opts.debug_flag);
+
+	while ( ! stop_app)
+	{
+		printf("hello!\n");
+		sleep(1);
+	}
+
+	printf("goodbye!\n");
 
 	return 0;
 }
