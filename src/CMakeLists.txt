@@ -1,2 +1,2 @@
-add_executable(template
-	template.cpp)
+add_executable(application
+	application.cpp)
