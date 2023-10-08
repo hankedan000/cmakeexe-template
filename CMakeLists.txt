@@ -4,6 +4,11 @@ project(TemplateProject VERSION 1.0.0)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+option(TEMPLATE_PROJECT_BUILD_ALL "Build all artifacts" OFF)
+
+# testing options
+option(TEMPLATE_PROJECT_BUILD_TESTS "Build tests" ON)
+
 # add project's module directory to CMAKE_MODULE_PATH
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
@@ -23,6 +28,15 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
 	endif()
 endif()
 
+# enable compiler warnings and treat them as errors
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
+
 add_subdirectory(extern)
 add_subdirectory(libraries)
 add_subdirectory(src)
+
+if (TEMPLATE_PROJECT_BUILD_TESTS OR TEMPLATE_PROJECT_BUILD_ALL)
+	message(STATUS "${PROJECT_NAME} - Generating tests")
+	include(CTest)
+	add_subdirectory(test)
+endif()
