@@ -1,18 +1,9 @@
+#include <argparse/argparse.hpp>
 #include <csignal>
-#include <getopt.h>
 #include <iostream>
 #include <unistd.h>// sleep
 
-const char *PROG_NAME = "application";
-
 static bool stop_app = false;
-
-struct prog_options
-{
-	std::string cfg_filepath = "default.cfg";
-	int daemon_flag = 0;
-	int debug_flag = 0;
-};
 
 void
 handle_sigint(
@@ -21,75 +12,40 @@ handle_sigint(
 	stop_app = true;
 }
 
-void
-display_usage()
-{
-	printf("usage: %s [options]\n",PROG_NAME);
-	printf(" --cfg-file       : path to a config file\n");
-	printf(" --daemon         : run as daemon process\n");
-	printf(" --debug          : enable debugging\n");
-	printf(" -h,--help        : display this menu\n");
-}
-
-void
-parse_args(
-	int argc,
-	char *argv[],
-	prog_options &opts)
-{
-	static struct option long_options[] =
-	{
-		{"cfg-file"      , required_argument, 0                   , 'c'},
-		{"daemon"        , no_argument      , &opts.daemon_flag  , 1  },
-		{"debug"         , no_argument      , &opts.debug_flag   , 1  },
-		{"help"          , no_argument      , 0                   , 'h'},
-		{0, 0, 0, 0}
-	};
-
-	while (true)
-	{
-		int option_index = 0;
-		int c = getopt_long(
-			argc,
-			argv,
-			"c:h",
-			long_options,
-			&option_index);
-
-		// detect the end of the options
-		if (c == -1)
-		{
-			break;
-		}
-
-		switch (c)
-		{
-			case 0:
-				// flag setting
-				break;
-			case 'c':
-				opts.cfg_filepath = optarg;
-				break;
-			case 'h':
-			case '?':
-			default:
-				display_usage();
-				exit(0);
-				break;
-		}
-	}
-}
-
 int main(int argc, char *argv[])
 {
 	signal(SIGINT, handle_sigint);// ctrl+c to stop application
 
-	prog_options opts;
-	parse_args(argc,argv,opts);
+	argparse::ArgumentParser program("application");
 
-	printf("cfg_filepath = %s\n", opts.cfg_filepath.c_str());
-	printf("daemon_flag  = %d\n", opts.daemon_flag);
-	printf("debug_flag   = %d\n", opts.debug_flag);
+	program.add_argument("--cfg-file")
+		.help("path to a config file")
+		.default_value("default.cfg");
+	
+	program.add_argument("--daemon")
+		.help("run as daemon process")
+		.default_value(false)
+		.implicit_value(true);
+	
+	program.add_argument("--verbose")
+		.help("increase output verbosity")
+		.default_value(false)
+		.implicit_value(true);
+
+	try
+	{
+    	program.parse_args(argc, argv);
+	}
+	catch (const std::exception & e)
+	{
+		std::cerr << e.what() << std::endl;
+		std::cerr << program;
+		return 1;
+	}
+
+	printf("cfg-file  = %s\n", program.get("cfg-file").c_str());
+	printf("daemon    = %d\n", program.get<bool>("daemon"));
+	printf("verbose   = %d\n", program.get<bool>("verbose"));
 
 	while ( ! stop_app)
 	{
