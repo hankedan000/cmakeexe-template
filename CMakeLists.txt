@@ -32,7 +32,6 @@ endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
 
 add_subdirectory(extern)
-add_subdirectory(libraries)
 add_subdirectory(src)
 
 if (TEMPLATE_PROJECT_BUILD_TESTS OR TEMPLATE_PROJECT_BUILD_ALL)
