@@ -3,6 +3,7 @@ cmake_minimum_required (VERSION 3.1)
 project(TemplateProject VERSION 1.0.0)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # used by SonarQube in IDE
 
 option(TEMPLATE_PROJECT_BUILD_ALL "Build all artifacts" OFF)
 
