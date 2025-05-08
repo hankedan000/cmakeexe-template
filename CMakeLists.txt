@@ -29,8 +29,13 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
 	endif()
 endif()
 
-# enable compiler warnings and treat them as errors
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
+# build for release if not set; otherwise, it's toolchain-dependant
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+
+# enable compiler warnings as errors
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror")
 
 add_subdirectory(extern)
 add_subdirectory(src)

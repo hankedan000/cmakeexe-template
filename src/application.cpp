@@ -7,7 +7,7 @@ static bool stop_app = false;
 
 void
 handle_sigint(
-	int signal)
+	int /* signal */)
 {
 	stop_app = true;
 }
