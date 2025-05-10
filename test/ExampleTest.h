@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cppunit/ui/text/TestRunner.h>
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
 

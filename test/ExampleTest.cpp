@@ -1,5 +1,7 @@
 #include "ExampleTest.h"
 
+#include <cppunit/ui/text/TestRunner.h>
+
 ExampleTest::ExampleTest()
 {
 }
@@ -24,7 +26,7 @@ ExampleTest::test1()
 
 int main()
 {
-	CppUnit::TextUi::TestRunner runner;
+	CppUnit::TextTestRunner runner;
 	runner.addTest(ExampleTest::suite());
-	return runner.run() ? 0 : EXIT_FAILURE;
+	return runner.run() ? EXIT_SUCCESS : EXIT_FAILURE;
 }
