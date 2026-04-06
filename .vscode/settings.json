@@ -1,5 +1,7 @@
 {
     "cmake.generator" : "Unix Makefiles",
+    "C_Cpp.formatting": "clangFormat",
+    "editor.formatOnSave": true,
     "sonarlint.pathToCompileCommands" : "build/compile_commands.json",
     "sonarlint.analysisExcludesStandalone" : "extern/**"
 }

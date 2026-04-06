@@ -1,0 +1,84 @@
+BasedOnStyle: LLVM
+
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+IndentCaseLabels: true
+
+# Brace style (Allman)
+BreakBeforeBraces: Allman
+
+# Function formatting
+AlwaysBreakAfterReturnType: All
+AlwaysBreakAfterDefinitionReturnType: All
+AlwaysBreakTemplateDeclarations: Yes
+
+# Pointer/reference style
+DerivePointerAlignment: false
+PointerAlignment: Middle
+ReferenceAlignment: Middle
+
+# Arguments and parameters
+AllowAllArgumentsOnNextLine: false
+AllowAllConstructorInitializersOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+BinPackParameters: false
+BinPackArguments: false
+
+# Constructor initializer lists
+BreakConstructorInitializers: BeforeComma
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+
+# Control statements
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+
+# Spacing
+SpaceAfterLogicalNot: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCaseColon: false
+SpaceBeforeInheritanceColon: false
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyBlock: false
+SpaceInEmptyParentheses: false
+SpacesInAngles: false
+SpacesInContainerLiterals: false
+SpacesInParentheses: false
+
+# Line length
+ColumnLimit: 80
+
+# Includes
+SortIncludes: true
+
+# Alignment
+AlignArrayOfStructures: Right
+AlignAfterOpenBracket: AlwaysBreak
+AlignConsecutiveBitFields: true
+AlignConsecutiveDeclarations: Consecutive
+AlignConsecutiveMacros: true
+AlignEscapedNewlines: Right
+AlignOperands: false
+AlignTrailingComments: false
+
+# Misc
+BreakBeforeTernaryOperators: true
+EmptyLineAfterAccessModifier: Never
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1
+QualifierAlignment: Left
+SeparateDefinitionBlocks: Always
+
+# Qt / macros
+StatementMacros:
+  - Q_OBJECT
+
+# Lambdas
+AllowShortLambdasOnASingleLine: Empty
+
+# Namespaces
+CompactNamespaces: false
+NamespaceIndentation: None

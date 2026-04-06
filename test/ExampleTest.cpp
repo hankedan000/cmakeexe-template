@@ -9,24 +9,25 @@ ExampleTest::ExampleTest()
 void
 ExampleTest::setUp()
 {
-	// run before each test case
+    // run before each test case
 }
 
 void
 ExampleTest::tearDown()
 {
-	// run after each test case
+    // run after each test case
 }
 
 void
 ExampleTest::test1()
 {
-	// test some stuff...
+    // test some stuff...
 }
 
-int main()
+int
+main()
 {
-	CppUnit::TextTestRunner runner;
-	runner.addTest(ExampleTest::suite());
-	return runner.run() ? EXIT_SUCCESS : EXIT_FAILURE;
+    CppUnit::TextTestRunner runner;
+    runner.addTest(ExampleTest::suite());
+    return runner.run() ? EXIT_SUCCESS : EXIT_FAILURE;
 }
